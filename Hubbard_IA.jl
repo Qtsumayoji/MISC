@@ -1,7 +1,6 @@
-using LinearAlgebra
-using SparseArrays
-using Distributions
 using PyPlot
+
+PyPlot.rc("font",family ="Times New Roman")
 
 t = 1.0
 U = 2.0
@@ -19,7 +18,7 @@ function ϵ_k(k)
     return -2.0*t*cos(k) - μ
 end
 
-function main()
+function exact()
     g = 2.0*π
     Q = zeros(Nx)
     for i in 1:Nx
@@ -44,11 +43,9 @@ function main()
 
     PyPlot.plot(Q, ω1)
     PyPlot.plot(Q, ω2)
-    PyPlot.savefig("mott_gap.png")
-    PyPlot.show()
 end
 
-function main2()
+function numerical()
     g = 2.0*π
     Nk = Nx + 1
     Q = zeros(Nk)
@@ -72,10 +69,12 @@ function main2()
     
     X = zeros(Nk + 1, NΩ + 1)
     Y = zeros(Nk + 1, NΩ + 1)
+    ΔX = Q[2] - Q[1]
+    ΔY = Ω[2] - Ω[1]
     for i in 1:NΩ + 1
         for m in 1:Nk + 1
-            X[m, i] = m - 1.5
-            Y[m, i] = i - 1.5
+            X[m, i] = Q[1] + (m - 1.5)*ΔX
+            Y[m, i] = Ω[1] + (i - 1.5)*ΔY
         end
     end
 
@@ -85,11 +84,22 @@ function main2()
     #G[end,end] = -im*3.0
     #G[1,end] = -im*4.0
 
-    PyPlot.figure(figsize=(10,8))
     PyPlot.pcolormesh(X, Y, -1.0/pi*imag(G))
     PyPlot.colorbar()
-    PyPlot.show()
-
 end
 
-main2()
+function main()
+    PyPlot.figure(figsize=(8,6))
+
+    exact()
+    numerical()
+
+    PyPlot.xlabel("k", size=20)
+    PyPlot.ylabel("ω", size=20)
+    PyPlot.tight_layout()
+    PyPlot.savefig("mott_gap.png")
+
+    PyPlot.show()
+end
+
+main()
