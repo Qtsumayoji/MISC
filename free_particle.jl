@@ -208,7 +208,7 @@ function testHubbardModelOnSquareLattice()
 
     #plotがうまくいかないっす
     plt.subplot(212)
-    plt.plot(1:Ns, n_dens)
+    plt.plot([1:Ns, n_dens])
     plt.show()
 end
 
