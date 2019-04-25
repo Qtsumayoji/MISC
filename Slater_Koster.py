@@ -43,15 +43,34 @@ def main():
     th = pi/2
     ph = pi/4
     print("[px-px]")
-    print(tx_x.subs([(theta, th), (phi, ph)]))
+    print(tx_x.subs([(theta, th), (phi, ph)]),"\n")
     print("[px-py]")
-    print(tx_y.subs([(theta, th), (phi, ph)]))
+    print(tx_y.subs([(theta, th), (phi, ph)]),"\n")
     print("[px-pz]")
-    print(tx_z.subs([(theta, th), (phi, ph)]))
+    print(tx_z.subs([(theta, th), (phi, ph)]),"\n")
 
+    th = pi/4
     ph = pi/2
     print("[pz-pz]")
-    print(tx_x.subs([(theta, th), (phi, ph)]))
+    print(tx_x.subs([(theta, th), (phi, ph)]),"\n")
+
+    th = pi/2
+    ph = 0
+    print("[px-dx2y2]")
+    print(tx_x2y2.subs([(theta, th), (phi, ph)]),"\n")
+    print("[py-dx2y2]")
+    print(ty_x2y2.subs([(theta, th), (phi, ph)]),"\n")
+    print("[pz-dx2y2]")
+    print(tz_x2y2.subs([(theta, th), (phi, ph)]),"\n")
+
+    th = pi/2
+    ph = 0
+    print("[px-3z2r2]")
+    print(tx_3z2r2.subs([(theta, th), (phi, ph)]),"\n")
+    print("[py-3z2r2]")
+    print(ty_3z2r2.subs([(theta, th), (phi, ph)]),"\n")
+    print("[pz-3z2r2]")
+    print(tz_3z2r2.subs([(theta, th), (phi, ph)]),"\n")
 
 
 if __name__ == "__main__":
