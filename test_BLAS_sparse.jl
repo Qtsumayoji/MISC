@@ -37,7 +37,6 @@ function set_sparse_matrix(n)
 end
 
 function test_sparse(n, nloop)
-
     A = set_sparse_matrix(n)
     B = set_sparse_matrix(n)
 
@@ -49,20 +48,13 @@ function test_sparse(n, nloop)
     println("matrix vector product*",nloop," loop")
     @time for i in 1:nloop
         A*vec
-        A*vec
-        A*vec
-        A*vec
-        A*vec
-        A*vec
-        A*vec
-        A*vec
         #Ax(A, vec)
         #A*B
     end
 end
 
 function main()
-    nloop = 100*10*10
+    nloop = 100000
     nGB = 1
     #n = Int64(nGB*2^27)
 

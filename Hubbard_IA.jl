@@ -3,7 +3,7 @@ using PyPlot
 PyPlot.rc("font",family ="Times New Roman")
 
 t = 1.0
-U = 2.0
+U = 1.0
 μ = U/2.0
 n_σ = 0.5
 η = 0.1*t
@@ -54,7 +54,7 @@ function numerical()
     end
 
     NΩ = 1000
-    Ω = range(-2*U, stop=2*U, length = NΩ)
+    Ω = range(-3t, stop=3t, length = NΩ)
 
     G = zeros(Complex, Nk, NΩ)
 
