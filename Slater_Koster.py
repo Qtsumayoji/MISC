@@ -32,9 +32,10 @@ tx_x2y2 = sqrt(3)/2*ex*(ex**2 - ey**2)*pdsigma + ex*(1 - ex**2 + ey**2)*pdpi
 ty_x2y2 = sqrt(3)/2*ey*(ex**2 - ey**2)*pdsigma - ey*(1 + ex**2 - ey**2)*pdpi
 tz_x2y2 = sqrt(3)/2*ez*(ex**2 - ey**2)*pdsigma - ez*(ex**2 - ey**2)*pdpi
 
-tx_3z2r2 = ex*(ez**2 - (ex**2 + ey**2)/2)*pdsigma - sqrt(3)*ex*ez**2
-ty_3z2r2 = ey*(ez**2 - (ex**2 + ey**2)/2)*pdsigma - sqrt(3)*ey*ez**2
-tz_3z2r2 = ex*(ez**2 - (ex**2 + ey**2)/2)*pdsigma + sqrt(3)*ez*(ex**2 + ey**2)
+tx_3z2r2 = ex*(ez**2 - (ex**2 + ey**2)/2)*pdsigma - sqrt(3)*ex*ez**2*pdpi
+ty_3z2r2 = ey*(ez**2 - (ex**2 + ey**2)/2)*pdsigma - sqrt(3)*ey*ez**2*pdpi
+tz_3z2r2 = ez*(ez**2 - (ex**2 + ey**2)/2)*pdsigma + sqrt(3)*ez*(ex**2 + ey**2)*pdpi
+
 
 def main():
     ppsigma = 0.5
@@ -49,8 +50,13 @@ def main():
     print("[px-pz]")
     print(tx_z.subs([(theta, th), (phi, ph)]),"\n")
 
-    th = pi/4
-    ph = pi/2
+    th = pi/2
+    ph = -pi/4
+    print("[py-pz]")
+    print(tx_z.subs([(theta, th), (phi, ph)]),"\n")
+
+    th = 0
+    ph = 0
     print("[pz-pz]")
     print(tx_x.subs([(theta, th), (phi, ph)]),"\n")
 
@@ -71,6 +77,20 @@ def main():
     print(ty_3z2r2.subs([(theta, th), (phi, ph)]),"\n")
     print("[pz-3z2r2]")
     print(tz_3z2r2.subs([(theta, th), (phi, ph)]),"\n")
+
+    th = pi/2
+    ph = 0
+    print("[px-xy]")
+    print(tx_xy.subs([(theta, th), (phi, ph)]),"\n")
+    th = pi/2
+    ph = pi/2
+    print("[py-xy]")
+    print(tx_xy.subs([(theta, th), (phi, ph)]),"\n")
+    th = 0
+    ph = 0
+    print("[pz-xy]")
+    print(tx_yz.subs([(theta, th), (phi, ph)]),"\n")
+
 
 
 if __name__ == "__main__":

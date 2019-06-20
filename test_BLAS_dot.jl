@@ -18,23 +18,26 @@ end
 
 function complex(n, nloop)
     println("allocation")
-    @time vec1 = rand(n) + im*rand(n)
-    @time vec2 = rand(n) + im*rand(n)
+    @time vec1 = zeros(ComplexF64, n)
+    @time vec2 = zeros(ComplexF64, n)
+    @time vec1 += rand(n) + im*rand(n)
+    @time vec2 += rand(n) + im*rand(n)
 
-    println("dot product")
+    println("dot product",typeof(vec1))
     @time vec1'*vec2
+    @time BLAS.dotc(n, vec1, 1, vec2, 1)
 
     println("dot product*",nloop," loop")
     @time for i in 1:nloop
         #vec1'*vec2
-        vcvc(vec1, vec2)
+        vcvc(n, vec1, vec2)
     end
 end
 
-function vcvc(x1, x2)
+function vcvc(dim::Int64 ,x1::Array{ComplexF64, 1}, x2::Array{ComplexF64, 1})
     #return real(x1)'*real(x1) - imag(x2)'*imag(x2) + im*(real(x1)'*imag(x2) + imag(x1)'*real(x2)) 
-    return x1'*x2
-    
+    #return @time x1'*x2
+    return BLAS.dotc(dim, x1, 1, x2, 1)
 end
 
 function main()
